@@ -6,5 +6,8 @@ module.exports = merge(common, {
   entry: {
     main: [path.resolve(__dirname, '../src/index.js')],
   },
+  output: {
+    publicPath: '/portfolio/dist/'
+  },
   mode: 'production',
 });
