@@ -111,7 +111,7 @@ export const HomePage = () => {
         <Box sx={{ height: '1500px' }} />
         <iframe
           src="/portfolio/dist/drillgame/index.html"
-          style="width: 1280px; height: 960px; flex-shrink: 0;"
+          style={{ width: '1280px', height: '960px', flexShrink: 0 }}
         />
       </Box>
     </Box>
