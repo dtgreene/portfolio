@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import { ThemeProvider, CssBaseline, createTheme } from '@mui/material';
 
 import { ErrorBoundary } from '../ErrorBoundary';
@@ -18,7 +18,7 @@ const darkTheme = createTheme({
 });
 
 export const App = () => (
-  <BrowserRouter>
+  <HashRouter>
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <ErrorBoundary>
@@ -29,5 +29,5 @@ export const App = () => (
         </Routes>
       </ErrorBoundary>
     </ThemeProvider>
-  </BrowserRouter>
+  </HashRouter>
 );
