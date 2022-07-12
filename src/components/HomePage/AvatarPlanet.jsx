@@ -32,6 +32,7 @@ const styles = {
     position: 'relative',
     transition: 'transform 0.8s',
     transformStyle: 'preserve-3d',
+    pointerEvents: 'none',
     img: {
       position: 'absolute',
       width: '256px',

@@ -1,0 +1,2 @@
+@keyframes blinker{50%{opacity:0}}@keyframes spinner{100%{transform:rotate(360deg)}}@keyframes bob{50%{transform:translateY(8px)}}@keyframes swivel{0%{transform:rotate(22deg)}50%{transform:rotate(67deg)}100%{transform:rotate(22deg)}}
+
