@@ -109,6 +109,7 @@ export const HomePage = () => {
           </svg>
         </Box>
       </Box>
+      <iframe src="/portfolio/dist/drillgame/index.html" />
     </Box>
   );
 };
