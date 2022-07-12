@@ -108,8 +108,12 @@ export const HomePage = () => {
             />
           </svg>
         </Box>
+        <Box sx={{ height: '1500px' }} />
+        <iframe
+          src="/portfolio/dist/drillgame/index.html"
+          style="width: 1280px; height: 960px; flex-shrink: 0;"
+        />
       </Box>
-      <iframe src="/portfolio/dist/drillgame/index.html" width="1280" height="960" />
     </Box>
   );
 };
