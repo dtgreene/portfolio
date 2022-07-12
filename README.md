@@ -1,2 +1,2 @@
-# react-template
-React template that includes React 17, WebPack 5, Mantine, and React Router
+# Portfolio
+A WIP page to serve as a fun and creative portfolio 
