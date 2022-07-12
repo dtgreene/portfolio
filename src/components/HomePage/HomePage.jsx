@@ -109,7 +109,7 @@ export const HomePage = () => {
           </svg>
         </Box>
       </Box>
-      <iframe src="/portfolio/dist/drillgame/index.html" />
+      <iframe src="/portfolio/dist/drillgame/index.html" width="1280" height="960" />
     </Box>
   );
 };
