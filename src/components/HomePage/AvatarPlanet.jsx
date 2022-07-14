@@ -37,7 +37,7 @@ const styles = {
       position: 'absolute',
       width: '256px',
       height: '256px',
-      '-webkit-backface-visibility': 'hidden',
+      WebkitBackfaceVisibility: 'hidden',
       backfaceVisibility: 'hidden',
       '&:last-child': {
         transform: 'rotateY(180deg)',
