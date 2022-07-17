@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 
 import { AvatarPlanet } from './AvatarPlanet';
 
@@ -29,8 +29,8 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    minHeight: 'calc(100vh - 150px)',
+    // width: '100%',
+    // minHeight: 'calc(100vh - 150px)',
   },
   breadCrumb: {
     width: '16px',
@@ -39,6 +39,13 @@ const styles = {
     borderRadius: '50%',
     marginBottom: '32px',
     boxShadow: '0 0 8px #fff',
+  },
+  breadCrumbPrimary: {
+    width: '8px',
+    height: '8px',
+    background: '#4effad',
+    borderRadius: '50%',
+    boxShadow: '0 0 8px #4effad',
   },
   textBlock: {
     marginBottom: '32px',
@@ -62,6 +69,7 @@ const styles = {
       animation: 'bob 5s ease-in-out infinite',
     },
   },
+  linkRow: { display: 'flex', gap: '16px', alignItems: 'center' },
 };
 
 export const HomePage = () => (
@@ -85,12 +93,40 @@ export const HomePage = () => (
         <Box sx={styles.breadCrumb} />
       </Box>
       <Box sx={styles.textBlock}>
-        <Typography variant="h4">Front-end Developer</Typography>
+        <Typography variant="h5">Front-end Developer</Typography>
       </Box>
-      <Box>
-        <Box sx={styles.breadCrumb} />
+      <Box sx={styles.linkRow}>
+        <Link
+          variant="h5"
+          color="primary"
+          fontFamily="Gloria Hallelujah"
+          href="https://github.com/dtgreene"
+          target="_blank"
+        >
+          GitHub
+        </Link>
+        <Box sx={styles.breadCrumbPrimary} />
+        <Link
+          variant="h5"
+          color="primary"
+          fontFamily="Gloria Hallelujah"
+          href="https://www.linkedin.com/in/dylan-greene/"
+          target="_blank"
+        >
+          LinkedIn
+        </Link>
+        <Box sx={styles.breadCrumbPrimary} />
+        <Link
+          variant="h5"
+          color="primary"
+          fontFamily="Gloria Hallelujah"
+          href="https://codepen.io/dylangggg"
+          target="_blank"
+        >
+          Codepen
+        </Link>
       </Box>
-      <Box sx={styles.moon}>
+      {/* <Box sx={styles.moon}>
         <img src={require('../../assets/cheese.png')} />
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
           <ellipse
@@ -104,9 +140,7 @@ export const HomePage = () => (
             strokeWidth="1"
           />
         </svg>
-      </Box>
-      <Box sx={{ height: '128px' }} />
-      <Box sx={{ background: '#0f1014', height: '128px', width: '100%', boxShadow: '0 0 16px #3c4456' }}></Box>
+      </Box> */}
     </Box>
   </Box>
 );
