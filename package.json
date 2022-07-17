@@ -1,7 +1,7 @@
 {
-  "name": "react-app",
+  "name": "dylandevs",
   "version": "1.0.0",
-  "description": "Template react app",
+  "description": "Personal website",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config ./config/webpack.prod.js",

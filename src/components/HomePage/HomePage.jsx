@@ -29,6 +29,8 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
+    minHeight: 'calc(100vh - 150px)',
   },
   breadCrumb: {
     width: '16px',
@@ -62,53 +64,49 @@ const styles = {
   },
 };
 
-export const HomePage = () => {
-  return (
-    <Box sx={styles.container}>
-      <Box sx={styles.stars} />
-      <Box sx={styles.solarSystem}>
-        <Box sx={styles.textBlock}>
-          <Typography variant="h4">Hi I'm</Typography>
-          <Typography
-            variant="h2"
-            color="primary"
-            fontFamily="Gloria Hallelujah"
-          >
-            Dylan Greene
-          </Typography>
-        </Box>
-        <Box>
-          <Box sx={styles.breadCrumb} />
-          <Box sx={styles.breadCrumb} />
-          <Box sx={styles.breadCrumb} />
-        </Box>
-        <AvatarPlanet />
-        <Box>
-          <Box sx={styles.breadCrumb} />
-          <Box sx={styles.breadCrumb} />
-        </Box>
-        <Box sx={styles.textBlock}>
-          <Typography variant="h4">Front-end Developer</Typography>
-        </Box>
-        <Box>
-          <Box sx={styles.breadCrumb} />
-        </Box>
-        <Box sx={styles.moon}>
-          <img src={require('../../assets/cheese.png')} />
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-            <ellipse
-              cx="64"
-              cy="64"
-              rx="62"
-              ry="62"
-              fill="none"
-              stroke="#aaa"
-              strokeDasharray="4"
-              strokeWidth="1"
-            />
-          </svg>
-        </Box>
+export const HomePage = () => (
+  <Box sx={styles.container}>
+    <Box sx={styles.stars} />
+    <Box sx={styles.solarSystem}>
+      <Box sx={styles.textBlock}>
+        <Typography variant="h4">Hi I'm</Typography>
+        <Typography variant="h2" color="primary" fontFamily="Gloria Hallelujah">
+          Dylan Greene
+        </Typography>
       </Box>
+      <Box>
+        <Box sx={styles.breadCrumb} />
+        <Box sx={styles.breadCrumb} />
+        <Box sx={styles.breadCrumb} />
+      </Box>
+      <AvatarPlanet />
+      <Box>
+        <Box sx={styles.breadCrumb} />
+        <Box sx={styles.breadCrumb} />
+      </Box>
+      <Box sx={styles.textBlock}>
+        <Typography variant="h4">Front-end Developer</Typography>
+      </Box>
+      <Box>
+        <Box sx={styles.breadCrumb} />
+      </Box>
+      <Box sx={styles.moon}>
+        <img src={require('../../assets/cheese.png')} />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+          <ellipse
+            cx="64"
+            cy="64"
+            rx="62"
+            ry="62"
+            fill="none"
+            stroke="#aaa"
+            strokeDasharray="4"
+            strokeWidth="1"
+          />
+        </svg>
+      </Box>
+      <Box sx={{ height: '128px' }} />
+      <Box sx={{ background: '#0f1014', height: '128px', width: '100%', boxShadow: '0 0 16px #3c4456' }}></Box>
     </Box>
-  );
-};
+  </Box>
+);
