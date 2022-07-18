@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { debounce } from 'lodash';
 import MainLoop from 'mainloop.js';
 
 const gravity = 0.001;
@@ -9,20 +8,23 @@ const halfPI = Math.PI * 0.5;
 let canvas, ctx;
 let points = [];
 let sticks = [];
+let targetSticks = [];
 let assetLoader = new AssetLoader([
   require('../../assets/cheese.png'),
   require('../../assets/star.png'),
 ]);
 let ready = false;
+let mousePos = { x: 0, y: 0 };
 
 export const SpaceCanvas = () => {
   useEffect(() => {
     // get the canvas context
     ctx = canvas.getContext('2d');
-    // create a debounce wrapper for the draw function
-    // const debounced = debounce(setup, 50);
+
     // add event listener for window resize events
     window.addEventListener('resize', setup, false);
+    window.addEventListener('click', clickHandler, false);
+    window.addEventListener('mousemove', mouseMoveHandler, false);
 
     // load our assets
     assetLoader.load().then(() => {
@@ -35,8 +37,9 @@ export const SpaceCanvas = () => {
 
     // callback when component un-mounts
     return () => {
-      // unsubscribe from resize event
+      // unsubscribe from events
       window.removeEventListener('resize', setup, false);
+      window.removeEventListener('click', clickHandler, false);
       // stop main loop
       MainLoop.stop();
     };
@@ -45,10 +48,39 @@ export const SpaceCanvas = () => {
   return (
     <canvas
       ref={(node) => (canvas = node)}
-      style={{ position: 'fixed', top: 0, left: 0, pointerEvents: 'none' }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        pointerEvents: 'none',
+        zIndex: 10,
+      }}
     />
   );
 };
+
+function mouseMoveHandler(event) {
+  mousePos = {
+    x: event.clientX,
+    y: event.clientY,
+  };
+}
+
+function clickHandler() {
+  for (let i = 0; i < targetSticks.length; i++) {
+    const { imageTarget, pointB } = targetSticks[i];
+    // not quite half since the images have some padding
+    const targetRadius = imageTarget.size * 0.4;
+    const position = {
+      x: pointB.position.x,
+      // half of the "radius" gets us pretty close without doing any angle math
+      y: pointB.position.y + targetRadius * 0.5,
+    };
+    if (distance(mousePos, position) < targetRadius) {
+      pointB.position.x += Math.random() * 30 - 15;
+    }
+  }
+}
 
 function createBody(x, segmentLength, segmentCount, imageTarget) {
   let tempPoints = [];
@@ -73,6 +105,7 @@ function createBody(x, segmentLength, segmentCount, imageTarget) {
 
   // add an image target to the last stick
   tempSticks[tempSticks.length - 1].imageTarget = imageTarget;
+  targetSticks.push(tempSticks[tempSticks.length - 1]);
 
   points = points.concat(tempPoints);
   sticks = sticks.concat(tempSticks);
@@ -91,18 +124,18 @@ function setup() {
   // y offset = size * 0.1875
   createBody(
     window.innerWidth * 0.15,
-    128,
-    4,
+    64,
+    6,
     new ImageTarget(assetLoader.assets[0], { x: -128, y: -75 }, 256)
   );
   createBody(
-    window.innerWidth * 0.95,
-    64,
+    window.innerWidth * 0.84,
+    32,
     4,
     new ImageTarget(assetLoader.assets[1], { x: -40, y: -15 }, 80)
   );
   createBody(
-    window.innerWidth * 0.85,
+    window.innerWidth * 0.92,
     64,
     3,
     new ImageTarget(assetLoader.assets[1], { x: -64, y: -24 }, 128)
@@ -163,10 +196,10 @@ function draw() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = 'red';
-  ctx.beginPath();
-  ctx.arc(canvas.width * 0.5, 547, 128, 0, Math.PI * 2);
-  ctx.fill();
+  // ctx.fillStyle = 'red';
+  // ctx.beginPath();
+  // ctx.arc(canvas.width * 0.5, 547, 128, 0, Math.PI * 2);
+  // ctx.fill();
 
   // draw sticks
   ctx.lineWidth = 4;
@@ -247,4 +280,8 @@ function AssetLoader(assetPaths) {
         image.src = path;
       });
     });
+}
+
+function distance(vectorA, vectorB) {
+  return Math.sqrt((vectorA.x - vectorB.x) ** 2 + (vectorA.y - vectorB.y) ** 2);
 }
