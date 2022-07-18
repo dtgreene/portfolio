@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Link, Typography } from '@mui/material';
 
 import { AvatarPlanet } from './AvatarPlanet';
-
+import { HangingStars } from './HangingStars';
 import './HomePage.scss';
 
 const styles = {
@@ -70,11 +70,13 @@ const styles = {
     },
   },
   linkRow: { display: 'flex', gap: '16px', alignItems: 'center' },
+  column: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
 };
 
 export const HomePage = () => (
   <Box sx={styles.container}>
     <Box sx={styles.stars} />
+    <HangingStars />
     <Box sx={styles.solarSystem}>
       <Box sx={styles.textBlock}>
         <Typography variant="h4">Hi I'm</Typography>
@@ -82,14 +84,14 @@ export const HomePage = () => (
           Dylan Greene
         </Typography>
       </Box>
-      <Box>
+      <Box sx={styles.column}>
         <Box sx={styles.breadCrumb} />
-        <Box sx={styles.breadCrumb} />
-        <Box sx={styles.breadCrumb} />
+        <Box sx={styles.breadCrumb} style={{ width: '32px', height: '32px' }} />
+        <Box sx={styles.breadCrumb} style={{ width: '48px', height: '48px' }} />
       </Box>
       <AvatarPlanet />
-      <Box>
-        <Box sx={styles.breadCrumb} />
+      <Box sx={styles.column}>
+        <Box sx={styles.breadCrumb} style={{ width: '32px', height: '32px' }} />
         <Box sx={styles.breadCrumb} />
       </Box>
       <Box sx={styles.textBlock}>
@@ -137,7 +139,7 @@ export const HomePage = () => (
             fill="none"
             stroke="#aaa"
             strokeDasharray="4"
-            strokeWidth="1"
+            strokeWidth="2"
           />
         </svg>
       </Box> */}
