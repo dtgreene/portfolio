@@ -270,9 +270,9 @@ function AssetLoader(assetPaths) {
     new Promise((res) => {
       this.assetPaths.forEach((path) => {
         const image = new Image();
+        this.assets.push(image);
         image.onload = () => {
           this.loaded++;
-          this.assets.push(image);
           if (this.loaded === this.assetPaths.length) {
             res(this.assets);
           }
