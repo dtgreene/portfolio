@@ -2,12 +2,12 @@ import React from 'react';
 import { Box, Link, Typography } from '@mui/material';
 
 import { AvatarPlanet } from './AvatarPlanet';
-import { HangingStars } from './HangingStars';
+import { SpaceCanvas } from './SpaceCanvas';
 import './HomePage.scss';
 
 const styles = {
   container: {
-    marginTop: '150px',
+    marginTop: '80px',
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
@@ -69,14 +69,19 @@ const styles = {
       animation: 'bob 5s ease-in-out infinite',
     },
   },
-  linkRow: { display: 'flex', gap: '16px', alignItems: 'center' },
+  linkRow: {
+    display: 'flex',
+    gap: '16px',
+    alignItems: 'center',
+    img: { width: '32px', height: '32px' },
+  },
   column: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
 };
 
 export const HomePage = () => (
   <Box sx={styles.container}>
     <Box sx={styles.stars} />
-    <HangingStars />
+    <SpaceCanvas />
     <Box sx={styles.solarSystem}>
       <Box sx={styles.textBlock}>
         <Typography variant="h4">Hi I'm</Typography>
@@ -107,7 +112,7 @@ export const HomePage = () => (
         >
           GitHub
         </Link>
-        <Box sx={styles.breadCrumbPrimary} />
+        <img src={require('../../assets/star-spin.gif')} />
         <Link
           variant="h5"
           color="primary"
@@ -117,7 +122,7 @@ export const HomePage = () => (
         >
           LinkedIn
         </Link>
-        <Box sx={styles.breadCrumbPrimary} />
+        <img src={require('../../assets/star-spin.gif')} />
         <Link
           variant="h5"
           color="primary"

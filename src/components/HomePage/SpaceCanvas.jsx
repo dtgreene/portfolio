@@ -1,43 +1,42 @@
-import React, { useEffect, useRef } from 'react';
-import { debounce } from 'lodash';
+import React, { useEffect } from 'react';
+// import { debounce } from 'lodash';
 import MainLoop from 'mainloop.js';
 
 const gravity = 0.001;
 const iterations = 3;
-const pointSize = 4;
-const pointSizeHalf = pointSize * 0.5;
 const halfPI = Math.PI * 0.5;
 
 let canvas, ctx;
 let points = [];
 let sticks = [];
-let starImage;
+let assetLoader = new AssetLoader([
+  require('../../assets/cheese.png'),
+  require('../../assets/star.png'),
+]);
 let ready = false;
 
-export const HangingStars = () => {
+export const SpaceCanvas = () => {
   useEffect(() => {
     // get the canvas context
     ctx = canvas.getContext('2d');
-    // run the canvas setup function
-    setup();
     // create a debounce wrapper for the draw function
-    const debounced = debounce(setup, 50);
+    // const debounced = debounce(setup, 50);
     // add event listener for window resize events
-    window.addEventListener('resize', debounced, false);
+    window.addEventListener('resize', setup, false);
 
-    // setup the star image
-    starImage = new Image();
-    starImage.onload = () => {
+    // load our assets
+    assetLoader.load().then(() => {
       ready = true;
+      // run the canvas setup function
+      setup();
       // setup and start main loop
       MainLoop.setUpdate(update).setDraw(draw).start();
-    };
-    starImage.src = require('../../assets/star.png');
+    });
 
     // callback when component un-mounts
     return () => {
       // unsubscribe from resize event
-      window.removeEventListener('resize', debounced, false);
+      window.removeEventListener('resize', setup, false);
       // stop main loop
       MainLoop.stop();
     };
@@ -51,10 +50,12 @@ export const HangingStars = () => {
   );
 };
 
-function createStar(x, segmentLength, segmentCount) {
+function createBody(x, segmentLength, segmentCount, imageTarget) {
   let tempPoints = [];
+  let tempSticks = [];
   let xx = x;
   let yy = 0;
+  // add points
   for (let i = 0; i < segmentCount; i++) {
     const position = { x: xx, y: yy };
     tempPoints.push(new Point(position, position, i === 0));
@@ -63,31 +64,49 @@ function createStar(x, segmentLength, segmentCount) {
     xx = xx + Math.cos(angle) * segmentLength;
     yy = yy + Math.sin(angle) * segmentLength;
   }
+  // add sticks
   for (let i = 0; i < segmentCount - 1; i++) {
-    sticks.push(
-      new Stick(
-        tempPoints[i],
-        tempPoints[i + 1],
-        segmentLength,
-        i === segmentCount - 2
-      )
+    tempSticks.push(
+      new Stick(tempPoints[i], tempPoints[i + 1], segmentLength, null)
     );
   }
+
+  // add an image target to the last stick
+  tempSticks[tempSticks.length - 1].imageTarget = imageTarget;
+
   points = points.concat(tempPoints);
+  sticks = sticks.concat(tempSticks);
 }
 
 function setup() {
   // set the canvas size
   canvas.width = window.innerWidth;
-  canvas.height = 1024;
+  canvas.height = window.innerHeight;
 
   // reset points and sticks
   points = [];
   sticks = [];
 
-  createStar(window.innerWidth * 0.08, 128, 4);
-  createStar(window.innerWidth * 0.95, 64, 4);
-  createStar(window.innerWidth * 0.85, 64, 3);
+  // x offset = size * 0.5
+  // y offset = size * 0.1875
+  createBody(
+    window.innerWidth * 0.15,
+    128,
+    4,
+    new ImageTarget(assetLoader.assets[0], { x: -128, y: -75 }, 256)
+  );
+  createBody(
+    window.innerWidth * 0.95,
+    64,
+    4,
+    new ImageTarget(assetLoader.assets[1], { x: -40, y: -15 }, 80)
+  );
+  createBody(
+    window.innerWidth * 0.85,
+    64,
+    3,
+    new ImageTarget(assetLoader.assets[1], { x: -64, y: -24 }, 128)
+  );
 }
 
 function update(delta) {
@@ -143,6 +162,12 @@ function draw() {
   if (!ready) return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = 'red';
+  ctx.beginPath();
+  ctx.arc(canvas.width * 0.5, 547, 128, 0, Math.PI * 2);
+  ctx.fill();
+
   // draw sticks
   ctx.lineWidth = 4;
   ctx.strokeStyle = '#aaa';
@@ -153,16 +178,22 @@ function draw() {
     ctx.lineTo(stick.pointB.position.x, stick.pointB.position.y);
     ctx.stroke();
 
-    if (stick.star) {
+    if (stick.imageTarget) {
+      // angle between the two points
       const angle =
         Math.atan2(
           stick.pointA.position.y - stick.pointB.position.y,
           stick.pointA.position.x - stick.pointB.position.x
         ) + halfPI;
+
+      // save before translating/rotating
       ctx.save();
       ctx.translate(stick.pointB.position.x, stick.pointB.position.y);
       ctx.rotate(angle);
-      ctx.drawImage(starImage, -64, -24);
+      // get our image params from the image target instance
+      const { image, offset, size } = stick.imageTarget;
+      ctx.drawImage(image, offset.x, offset.y, size, size);
+      // restore the canvas
       ctx.restore();
     }
   }
@@ -185,9 +216,35 @@ function Point(position, prevPosition, locked) {
   this.locked = locked;
 }
 
-function Stick(pointA, pointB, length, star) {
+function Stick(pointA, pointB, length, imageTarget) {
   this.pointA = pointA;
   this.pointB = pointB;
   this.length = length;
-  this.star = star;
+  this.imageTarget = imageTarget;
+}
+
+function ImageTarget(image, offset, size) {
+  this.image = image;
+  this.offset = offset;
+  this.size = size;
+}
+
+function AssetLoader(assetPaths) {
+  this.assetPaths = assetPaths;
+  this.assets = [];
+  this.loaded = 0;
+  this.load = () =>
+    new Promise((res) => {
+      this.assetPaths.forEach((path) => {
+        const image = new Image();
+        image.onload = () => {
+          this.loaded++;
+          this.assets.push(image);
+          if (this.loaded === this.assetPaths.length) {
+            res(this.assets);
+          }
+        };
+        image.src = path;
+      });
+    });
 }
