@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
+import { useWindowSize } from '../../hooks';
+
 const planetColor = '#4effad';
 
 const styles = {
@@ -12,6 +14,8 @@ const styles = {
     position: 'relative',
   },
   planet: {
+    width: '100%',
+    height: '100%',
     borderRadius: '50%',
     boxShadow: `0 0 32px ${planetColor}`,
     overflow: 'hidden',
@@ -29,7 +33,11 @@ const styles = {
     transition: 'transform 0.8s',
     transformStyle: 'preserve-3d',
     pointerEvents: 'none',
+    width: '100%',
+    height: '100%',
     img: {
+      width: '100%',
+      height: '100%',
       position: 'absolute',
       WebkitBackfaceVisibility: 'hidden',
       backfaceVisibility: 'hidden',
@@ -39,6 +47,8 @@ const styles = {
     },
   },
   orbit: {
+    width: '300%',
+    height: '300%',
     position: 'absolute',
     pointerEvents: 'none',
     svg: {
@@ -82,11 +92,11 @@ const styles = {
   },
 };
 
-const Orbit = ({ index, frontClipY, rx, ry, style = {} }) => {
+const Orbit = ({ index, frontClipY, rx, ry }) => {
   const tempMaskId = `sun-mask-${index}-temp`;
   const maskId = `sun-mask-${index}`;
   return (
-    <Box sx={styles.orbit} style={style}>
+    <Box sx={styles.orbit}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 128 128"
@@ -164,27 +174,21 @@ const Rocket = (
 );
 
 export const AvatarPlanet = () => {
-  const planetSize = 256;
-  const planetStyle = { width: `${planetSize}px`, height: `${planetSize}px` };
-  const orbitStyle = {
-    width: `${planetSize * 3}px`,
-    height: `${planetSize * 3}px`,
-  };
+  // const size = useWindowSize();
+  
+  const systemSize = 256;
+  const systemStyle = { width: `${systemSize}px`, height: `${systemSize}px` };
 
   return (
-    <Box sx={styles.planetSystem} style={planetStyle}>
-      <Box sx={styles.planet} style={planetStyle}>
+    <Box sx={styles.planetSystem} style={systemStyle}>
+      <Box sx={styles.planet}>
         <Box sx={styles.planetInner}>
-          <img src={require('../../assets/dylan.png')} style={planetStyle} />
-          <img
-            src={require('../../assets/dylan-real.png')}
-            style={planetStyle}
-          />
+          <img src={require('../../assets/dylan.png')} />
+          <img src={require('../../assets/dylan-real.png')} />
         </Box>
       </Box>
-      <Orbit index={0} frontClipY={64} rx={32} ry={3} style={orbitStyle} />
-      <Orbit index={1} frontClipY={64} rx={44} ry={6} style={orbitStyle} />
-      {/* <Orbit index={2} frontClipY={64} rx={56} ry={9} /> */}
+      <Orbit index={0} frontClipY={64} rx={32} ry={3} />
+      <Orbit index={1} frontClipY={64} rx={44} ry={6} />
       <Box sx={styles.galaxy1}>{Galaxy}</Box>
       <Box sx={styles.galaxy2}>{Galaxy}</Box>
       <Box sx={styles.rocket1}>{Rocket}</Box>

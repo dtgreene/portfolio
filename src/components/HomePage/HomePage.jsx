@@ -7,7 +7,6 @@ import './HomePage.scss';
 
 const styles = {
   container: {
-    marginTop: '80px',
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
@@ -29,8 +28,7 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    // width: '100%',
-    // minHeight: 'calc(100vh - 150px)',
+    margin: '80px 0'
   },
   breadCrumb: {
     width: '16px',
@@ -133,21 +131,6 @@ export const HomePage = () => (
           Codepen
         </Link>
       </Box>
-      {/* <Box sx={styles.moon}>
-        <img src={require('../../assets/cheese.png')} />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-          <ellipse
-            cx="64"
-            cy="64"
-            rx="62"
-            ry="62"
-            fill="none"
-            stroke="#aaa"
-            strokeDasharray="4"
-            strokeWidth="2"
-          />
-        </svg>
-      </Box> */}
     </Box>
   </Box>
 );
