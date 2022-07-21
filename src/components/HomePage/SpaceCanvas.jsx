@@ -76,11 +76,11 @@ function focusHandler() {
 }
 
 function mouseMoveHandler(event) {
-	const rect = canvas.getBoundingClientRect();
+  const rect = canvas.getBoundingClientRect();
   mousePos = {
-		x: event.clientX - rect.left, 
-		y: event.clientY - rect.top
-	};
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top,
+  };
 }
 
 function clickHandler() {

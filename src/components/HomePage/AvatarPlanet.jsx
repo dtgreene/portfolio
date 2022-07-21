@@ -65,7 +65,7 @@ const useStyles = (theme) => ({
       animation: 'blinker 3s ease-in-out infinite',
     },
   },
-  galaxy1: {
+  star1: {
     width: '64px',
     height: '64px',
     top: '-19px',
@@ -80,7 +80,7 @@ const useStyles = (theme) => ({
       left: '-57px',
     },
   },
-  galaxy2: {
+  star2: {
     width: '100px',
     height: '100px',
     top: '-113px',
@@ -158,7 +158,7 @@ const Orbit = ({ index, frontClipY, rx, ry, styles }) => {
   );
 };
 
-const Galaxy = (
+const Star = (
   <svg
     height="100%"
     viewBox="0 0 128 128"
@@ -211,9 +211,9 @@ export const AvatarPlanet = () => {
         </Box>
       </Box>
       <Orbit index={0} frontClipY={64} rx={32} ry={3} styles={styles} />
-      <Orbit index={1} frontClipY={64} rx={44} ry={6} styles={styles} />
-      <Box sx={styles.galaxy1}>{Galaxy}</Box>
-      <Box sx={styles.galaxy2}>{Galaxy}</Box>
+      <Orbit index={1} frontClipY={64} rx={40} ry={6} styles={styles} />
+      <Box sx={styles.star1}>{Star}</Box>
+      <Box sx={styles.star2}>{Star}</Box>
       <Box sx={styles.rocket1}>{Rocket}</Box>
     </Box>
   );
