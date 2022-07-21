@@ -1,11 +1,16 @@
 import React from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom';
-import { ThemeProvider, CssBaseline, createTheme } from '@mui/material';
+import {
+  ThemeProvider,
+  CssBaseline,
+  createTheme,
+  responsiveFontSizes,
+} from '@mui/material';
 
 import { ErrorBoundary } from '../ErrorBoundary';
 import { HomePage } from '../HomePage';
 
-const darkTheme = createTheme({
+let theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
@@ -17,9 +22,11 @@ const darkTheme = createTheme({
   },
 });
 
+theme = responsiveFontSizes(theme);
+
 export const App = () => (
   <HashRouter>
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <ErrorBoundary>
         <Routes>

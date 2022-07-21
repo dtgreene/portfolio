@@ -1,17 +1,27 @@
 import React from 'react';
-import { Box } from '@mui/material';
-
-import { useWindowSize } from '../../hooks';
+import { Box, useTheme } from '@mui/material';
 
 const planetColor = '#4effad';
 
-const styles = {
+const useStyles = (theme) => ({
   planetSystem: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: '32px',
     position: 'relative',
+    [theme.breakpoints.down('md')]: {
+      width: '150px',
+      height: '150px',
+    },
+    [theme.breakpoints.only('md')]: {
+      width: '200px',
+      height: '200px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '260px',
+      height: '260px',
+    },
   },
   planet: {
     width: '100%',
@@ -52,7 +62,6 @@ const styles = {
     position: 'absolute',
     pointerEvents: 'none',
     svg: {
-      filter: 'drop-shadow(0 0 4px #fff)',
       animation: 'blinker 3s ease-in-out infinite',
     },
   },
@@ -64,8 +73,11 @@ const styles = {
     position: 'absolute',
     animation: 'bounce 15s ease-in-out infinite',
     animationDelay: '-8s',
-    svg: {
-      filter: 'drop-shadow(0 0 4px #fff)',
+    [theme.breakpoints.down('md')]: {
+      width: '50px',
+      height: '50px',
+      top: '-24px',
+      left: '-57px',
     },
   },
   galaxy2: {
@@ -75,8 +87,14 @@ const styles = {
     left: '283px',
     position: 'absolute',
     animation: 'bounce 15s ease-in-out infinite',
-    svg: {
-      filter: 'drop-shadow(0 0 4px #fff)',
+    [theme.breakpoints.down('md')]: {
+      width: '80px',
+      height: '80px',
+      top: '-74px',
+      left: '134px',
+    },
+    [theme.breakpoints.only('md')]: {
+      left: '231px',
     },
   },
   rocket1: {
@@ -86,13 +104,20 @@ const styles = {
     left: '225px',
     position: 'absolute',
     animation: 'swivel 10s ease-in-out infinite',
-    svg: {
-      filter: 'drop-shadow(0 0 4px #fff)',
+    [theme.breakpoints.down('md')]: {
+      width: '80px',
+      height: '80px',
+      top: '132px',
+      left: '161px',
+    },
+    [theme.breakpoints.only('md')]: {
+      top: '190px',
+      left: '197px',
     },
   },
-};
+});
 
-const Orbit = ({ index, frontClipY, rx, ry }) => {
+const Orbit = ({ index, frontClipY, rx, ry, styles }) => {
   const tempMaskId = `sun-mask-${index}-temp`;
   const maskId = `sun-mask-${index}`;
   return (
@@ -174,21 +199,19 @@ const Rocket = (
 );
 
 export const AvatarPlanet = () => {
-  // const size = useWindowSize();
-  
-  const systemSize = 256;
-  const systemStyle = { width: `${systemSize}px`, height: `${systemSize}px` };
+  const theme = useTheme();
+  const styles = useStyles(theme);
 
   return (
-    <Box sx={styles.planetSystem} style={systemStyle}>
+    <Box sx={styles.planetSystem}>
       <Box sx={styles.planet}>
         <Box sx={styles.planetInner}>
           <img src={require('../../assets/dylan.png')} />
           <img src={require('../../assets/dylan-real.png')} />
         </Box>
       </Box>
-      <Orbit index={0} frontClipY={64} rx={32} ry={3} />
-      <Orbit index={1} frontClipY={64} rx={44} ry={6} />
+      <Orbit index={0} frontClipY={64} rx={32} ry={3} styles={styles} />
+      <Orbit index={1} frontClipY={64} rx={44} ry={6} styles={styles} />
       <Box sx={styles.galaxy1}>{Galaxy}</Box>
       <Box sx={styles.galaxy2}>{Galaxy}</Box>
       <Box sx={styles.rocket1}>{Rocket}</Box>

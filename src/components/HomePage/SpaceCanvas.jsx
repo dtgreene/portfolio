@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import MainLoop from 'mainloop.js';
 
-import { useWindowSize } from '../../hooks';
-
 const gravity = 0.001;
 const iterations = 3;
 const halfPI = Math.PI * 0.5;
@@ -13,13 +11,13 @@ let hangers = [];
 let assetLoader = new AssetLoader([
   require('../../assets/cheese.png'),
   require('../../assets/star.png'),
+  // require('../../assets/alien-ship.png'),
 ]);
 let ready = false;
 let mousePos = { x: 0, y: 0 };
+// let alienPos = { x: 0, y: 0 }
 
 export const SpaceCanvas = () => {
-  const size = useWindowSize();
-  console.log(size);
   useEffect(() => {
     // get the canvas context
     ctx = canvas.getContext('2d');
@@ -68,7 +66,7 @@ export const SpaceCanvas = () => {
 };
 
 function blurHandler() {
-  if(MainLoop.isRunning()) {
+  if (MainLoop.isRunning()) {
     MainLoop.stop();
   }
 }
@@ -78,10 +76,11 @@ function focusHandler() {
 }
 
 function mouseMoveHandler(event) {
+	const rect = canvas.getBoundingClientRect();
   mousePos = {
-    x: event.clientX,
-    y: event.clientY,
-  };
+		x: event.clientX - rect.left, 
+		y: event.clientY - rect.top
+	};
 }
 
 function clickHandler() {
@@ -127,13 +126,11 @@ function createHanger(x, segmentLength, segmentCount, imageTarget) {
 }
 
 function setup() {
-  const rect = document.body.getBoundingClientRect();
-
   // set the canvas size
-  canvas.width = rect.width;
-  canvas.height = rect.height;
+  canvas.width = window.innerWidth;
+  canvas.height = 512;
 
-  if (canvas.width > 960) {
+  if (canvas.width > 900) {
     if (!MainLoop.isRunning() && ready) {
       // start the loop if not running
       MainLoop.start();
@@ -234,6 +231,8 @@ function draw() {
   if (!ready) return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // ctx.drawImage(assetLoader.assets[2], alienPos.x, alienPos.y, 400, 400);
 
   for (let i = 0; i < hangers.length; i++) {
     const { sticks } = hangers[i];
