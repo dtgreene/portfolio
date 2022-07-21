@@ -10,13 +10,13 @@ const useStyles = (theme) => ({
     alignItems: 'center',
     marginBottom: '32px',
     position: 'relative',
-    [theme.breakpoints.down('md')]: {
-      width: '150px',
-      height: '150px',
-    },
-    [theme.breakpoints.only('md')]: {
+    [theme.breakpoints.down('lg')]: {
       width: '200px',
       height: '200px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '150px',
+      height: '150px',
     },
     [theme.breakpoints.up('lg')]: {
       width: '260px',
@@ -66,53 +66,68 @@ const useStyles = (theme) => ({
     },
   },
   star1: {
-    width: '64px',
-    height: '64px',
-    top: '-19px',
-    left: '-91px',
     position: 'absolute',
     animation: 'bounce 15s ease-in-out infinite',
     animationDelay: '-8s',
-    [theme.breakpoints.down('md')]: {
-      width: '50px',
-      height: '50px',
-      top: '-24px',
-      left: '-57px',
+    [theme.breakpoints.down('lg')]: {
+      width: '64px',
+      height: '64px',
+      top: '-19px',
+      left: '-91px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '48px',
+      height: '48px',
+      top: '-11px',
+      left: '-66px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '64px',
+      height: '64px',
+      top: '-19px',
+      left: '-91px',
     },
   },
   star2: {
-    width: '100px',
-    height: '100px',
-    top: '-113px',
-    left: '283px',
     position: 'absolute',
     animation: 'bounce 15s ease-in-out infinite',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
+      width: '100px',
+      height: '100px',
+      top: '-113px',
+      left: '221px',
+    },
+    [theme.breakpoints.down('sm')]: {
       width: '80px',
       height: '80px',
-      top: '-74px',
-      left: '134px',
+      top: '-73px',
+      left: '143px',
     },
-    [theme.breakpoints.only('md')]: {
-      left: '231px',
+    [theme.breakpoints.up('lg')]: {
+      width: '100px',
+      height: '100px',
+      top: '-113px',
+      left: '283px',
     },
   },
   rocket1: {
-    width: '100px',
-    height: '100px',
-    top: '244px',
-    left: '225px',
     position: 'absolute',
     animation: 'swivel 10s ease-in-out infinite',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       width: '80px',
       height: '80px',
-      top: '132px',
-      left: '161px',
+      top: '187px',
+      left: '193px',
     },
-    [theme.breakpoints.only('md')]: {
-      top: '190px',
-      left: '197px',
+    [theme.breakpoints.down('sm')]: {
+      top: '133px',
+      left: '136px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '100px',
+      height: '100px',
+      top: '244px',
+      left: '225px',
     },
   },
 });
