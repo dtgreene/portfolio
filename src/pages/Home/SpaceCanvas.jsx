@@ -50,24 +50,16 @@ export const SpaceCanvas = () => {
   }, []);
 
   return (
-    <>
-      <canvas
-        ref={(node) => (canvas = node)}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          pointerEvents: 'none',
-          zIndex: 10,
-        }}
-      />
-      <canvas
-        style={{
-          pointerEvents: 'none',
-          zIndex: 10,
-        }}
-      />
-    </>
+    <canvas
+      ref={(node) => (canvas = node)}
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        pointerEvents: 'none',
+        zIndex: 10,
+      }}
+    />
   );
 };
 

@@ -107,6 +107,7 @@ export const Home = () => {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.stars} />
+      <SpaceCanvas />
       <Box sx={styles.solarSystem}>
         <Box sx={styles.textBlock}>
           <Typography variant="h4">Hi I'm</Typography>
@@ -163,7 +164,6 @@ export const Home = () => {
           </Link>
         </Box>
       </Box>
-      <SpaceCanvas />
     </Box>
   );
 };
