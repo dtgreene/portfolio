@@ -5,14 +5,13 @@ import { loadImages } from 'src/utils';
 
 const canvasHeight = 256;
 const bannerText = 'HIRE ME';
-const startShipXRelative = -0.25;
-const stopShipXRelative = 1.5;
+const startShipX = -300;
+const stopShipX = 650;
 
 let canvas, ctx;
 let images = [];
-let mousePos = { x: 0, y: 0 };
-let shipPos = { x: 0, y: 0 };
-let shipPosRelative = { x: startShipXRelative, y: 0.5 };
+let shipPos = { x: startShipX, y: 0 };
+let shipPosRelative = { x: 0, y: 0.5 };
 let bannerSinValue = 0;
 
 export const AlienCanvas = () => {
@@ -31,8 +30,6 @@ export const AlienCanvas = () => {
 
     // add event listener for window events
     window.addEventListener('resize', resizeHandler, false);
-    window.addEventListener('click', clickHandler, false);
-    window.addEventListener('mousemove', mouseMoveHandler, false);
 
     // subscribe to the mainloop event
     subscribe(MainLoopEvents.UPDATE, update);
@@ -43,8 +40,6 @@ export const AlienCanvas = () => {
     return () => {
       // unsubscribe from events
       window.removeEventListener('resize', resizeHandler, false);
-      window.removeEventListener('click', clickHandler, false);
-      window.removeEventListener('mousemove', mouseMoveHandler, false);
 
       unsubscribe(MainLoopEvents.UPDATE, update);
     };
@@ -55,21 +50,11 @@ export const AlienCanvas = () => {
       ref={(node) => (canvas = node)}
       style={{
         pointerEvents: 'none',
-        zIndex: 10,
+        zIndex: -10,
       }}
     />
   );
 };
-
-function mouseMoveHandler(event) {
-  const rect = canvas.getBoundingClientRect();
-  mousePos = {
-    x: event.clientX - rect.left,
-    y: event.clientY - rect.top,
-  };
-}
-
-function clickHandler() {}
 
 function resizeHandler() {
   // set the canvas size
@@ -88,8 +73,8 @@ function update(delta) {
 
   // update ship pos
   shipPos.x += 0.2 * delta;
-  if (shipPos.x > stopShipXRelative * canvas.width) {
-    shipPos.x = startShipXRelative * canvas.width;
+  if (shipPos.x > canvas.width + stopShipX) {
+    shipPos.x = startShipX;
   }
   shipPosRelative.x = shipPos.x / canvas.width;
 
