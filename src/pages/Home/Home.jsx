@@ -4,7 +4,7 @@ import { Box, Link, Typography, useTheme } from '@mui/material';
 import { AvatarPlanet } from './AvatarPlanet';
 import { SpaceCanvas } from './SpaceCanvas';
 
-import './HomePage.scss';
+import './Home.scss';
 
 const useStyles = (theme) => ({
   container: {
@@ -100,14 +100,13 @@ const useStyles = (theme) => ({
   column: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
 });
 
-export const HomePage = () => {
+export const Home = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
 
   return (
     <Box sx={styles.container}>
       <Box sx={styles.stars} />
-      <SpaceCanvas />
       <Box sx={styles.solarSystem}>
         <Box sx={styles.textBlock}>
           <Typography variant="h4">Hi I'm</Typography>
@@ -164,6 +163,7 @@ export const HomePage = () => {
           </Link>
         </Box>
       </Box>
+      <SpaceCanvas />
     </Box>
   );
 };

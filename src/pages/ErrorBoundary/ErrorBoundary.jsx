@@ -5,7 +5,6 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
-  ExpandMoreIcon,
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 

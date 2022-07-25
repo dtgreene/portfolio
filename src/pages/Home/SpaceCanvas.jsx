@@ -11,11 +11,9 @@ let hangers = [];
 let assetLoader = new AssetLoader([
   require('../../assets/cheese.png'),
   require('../../assets/star.png'),
-  // require('../../assets/alien-ship.png'),
 ]);
 let ready = false;
 let mousePos = { x: 0, y: 0 };
-// let alienPos = { x: 0, y: 0 }
 
 export const SpaceCanvas = () => {
   useEffect(() => {
@@ -52,16 +50,24 @@ export const SpaceCanvas = () => {
   }, []);
 
   return (
-    <canvas
-      ref={(node) => (canvas = node)}
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        pointerEvents: 'none',
-        zIndex: 10,
-      }}
-    />
+    <>
+      <canvas
+        ref={(node) => (canvas = node)}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          pointerEvents: 'none',
+          zIndex: 10,
+        }}
+      />
+      <canvas
+        style={{
+          pointerEvents: 'none',
+          zIndex: 10,
+        }}
+      />
+    </>
   );
 };
 

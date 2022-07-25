@@ -7,8 +7,7 @@ import {
   responsiveFontSizes,
 } from '@mui/material';
 
-import { ErrorBoundary } from '../ErrorBoundary';
-import { HomePage } from '../HomePage';
+import { Home, ErrorBoundary } from '../../pages';
 
 let theme = createTheme({
   palette: {
@@ -31,7 +30,7 @@ export const App = () => (
       <ErrorBoundary>
         <Routes>
           <Route path="/">
-            <Route index element={<HomePage />} />
+            <Route index element={<Home />} />
           </Route>
         </Routes>
       </ErrorBoundary>
