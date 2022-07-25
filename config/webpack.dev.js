@@ -5,9 +5,6 @@ const path = require('path');
 process.env.NODE_ENV = 'development';
 
 module.exports = merge(common, {
-  entry: {
-    main: [path.resolve(__dirname, '../src/index.js')],
-  },
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {

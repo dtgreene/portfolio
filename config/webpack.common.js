@@ -4,6 +4,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
+  entry: {
+    main: [
+      'regenerator-runtime/runtime.js',
+      path.resolve(__dirname, '../src/index.js'),
+    ],
+  },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'bundle.js',
@@ -11,6 +17,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      src: path.resolve(__dirname, '../src/'),
+    },
   },
   target: 'web',
   module: {

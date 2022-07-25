@@ -7,7 +7,8 @@ import {
   responsiveFontSizes,
 } from '@mui/material';
 
-import { Home, ErrorBoundary } from '../../pages';
+import { ErrorBoundary } from '../ErrorBoundary'
+import { Home } from 'src/pages';
 
 let theme = createTheme({
   palette: {

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Box, Link, Typography, useTheme } from '@mui/material';
 
+import { useMainLoop } from 'src/hooks/useMainLoop';
 import { AvatarPlanet } from './AvatarPlanet';
 import { SpaceCanvas } from './SpaceCanvas';
+import { AlienCanvas } from './AlienCanvas';
 
 import './Home.scss';
 
@@ -92,6 +94,7 @@ const useStyles = (theme) => ({
     display: 'flex',
     gap: '16px',
     alignItems: 'center',
+    marginBottom: '32px',
     img: { width: '32px', height: '32px' },
     [theme.breakpoints.down('sm')]: {
       gap: '0',
@@ -103,6 +106,8 @@ const useStyles = (theme) => ({
 export const Home = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
+  
+  useMainLoop();
 
   return (
     <Box sx={styles.container}>
@@ -163,6 +168,7 @@ export const Home = () => {
             CodePen
           </Link>
         </Box>
+        <AlienCanvas />
       </Box>
     </Box>
   );
