@@ -12,8 +12,8 @@ const styles = {
   ship: {
     position: 'absolute',
     height: '100%',
+    animation: 'bob 3s ease-in-out infinite',
     img: {
-      animation: 'bob 2s ease-in-out infinite',
       zIndex: 10,
       position: 'absolute',
     },
@@ -22,10 +22,9 @@ const styles = {
     position: 'absolute',
     width: '64px',
     height: '4px',
-    background: '#645e5b',
+    background: '#575757',
     left: '225px',
-    top: '145px',
-    animation: 'rope-swivel 2s ease-in-out infinite',
+    top: '135px',
   },
 };
 
@@ -65,7 +64,6 @@ export const AlienShip = () => {
           style={{
             width: '256px',
             height: '128px',
-            animationDelay: '-1s',
             top: '64px',
           }}
         />
@@ -76,7 +74,7 @@ export const AlienShip = () => {
             width: '256px',
             height: '256px',
             top: '10px',
-            left: '240px',
+            left: '245px',
           }}
         />
       </Box>
