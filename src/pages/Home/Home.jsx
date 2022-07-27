@@ -4,7 +4,7 @@ import { Box, Link, Typography, useTheme } from '@mui/material';
 import { useMainLoop } from 'src/hooks/useMainLoop';
 import { AvatarPlanet } from './AvatarPlanet';
 import { SpaceCanvas } from './SpaceCanvas';
-import { AlienCanvas } from './AlienCanvas';
+import { AlienShip } from './AlienShip';
 
 import './Home.scss';
 
@@ -168,7 +168,7 @@ export const Home = () => {
             CodePen
           </Link>
         </Box>
-        <AlienCanvas />
+        <AlienShip />
       </Box>
     </Box>
   );
