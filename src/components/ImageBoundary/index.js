@@ -1,0 +1,1 @@
+export { ImageBoundary } from './ImageBoundary';

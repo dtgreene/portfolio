@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Box, Link, Typography, useTheme } from '@mui/material';
 
 import { AvatarPlanet } from './AvatarPlanet';
@@ -105,14 +105,14 @@ const useStyles = (theme) => ({
   column: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
 });
 
-export const Home = () => {
+export const Home = forwardRef((props, ref) => {
   const theme = useTheme();
   const styles = useStyles(theme);
 
   useMainLoop();
 
   return (
-    <Box sx={styles.container}>
+    <Box {...props} sx={styles.container} ref={ref}>
       <Box sx={styles.stars} />
       <SpaceCanvas />
       <Box sx={styles.solarSystem}>
@@ -173,4 +173,4 @@ export const Home = () => {
       </Box>
     </Box>
   );
-};
+});

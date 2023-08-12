@@ -6,10 +6,15 @@ import {
   responsiveFontSizes,
 } from '@mui/material';
 
-import { ErrorBoundary } from '../ErrorBoundary';
 import { Home } from 'src/pages';
+import { ImageBoundary } from '../ImageBoundary';
 
-import './App.css';
+import DylanImage from 'src/assets/images/dylan.png';
+import DylanRealImage from 'src/assets/images/dylan-real.png';
+import BackgroundStarsImage from 'src/assets/images/background-stars.png';
+import StarSpinImage from 'src/assets/images/star-spin.gif';
+import CheeseImage from 'src/assets/images/cheese.png';
+import StarImage from 'src/assets/images/star.png';
 
 const baseTheme = createTheme({
   palette: {
@@ -17,7 +22,9 @@ const baseTheme = createTheme({
     primary: {
       main: '#4effad',
     },
-    background: 'blue',
+    background: {
+      default: '#010102'
+    }
   },
   typography: {
     fontFamily: 'Poppins, Helvetica',
@@ -25,11 +32,20 @@ const baseTheme = createTheme({
 });
 const theme = responsiveFontSizes(baseTheme);
 
+const imagesToPreload = [
+  DylanImage,
+  DylanRealImage,
+  BackgroundStarsImage,
+  StarSpinImage,
+  CheeseImage,
+  StarImage,
+];
+
 export const App = () => (
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <ErrorBoundary>
+    <ImageBoundary images={imagesToPreload}>
       <Home />
-    </ErrorBoundary>
+    </ImageBoundary>
   </ThemeProvider>
 );
