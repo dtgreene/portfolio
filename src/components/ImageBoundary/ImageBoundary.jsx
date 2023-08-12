@@ -1,29 +1,34 @@
 import { useEffect, useRef, useState } from 'react';
 import Fade from '@mui/material/Fade';
 
+const FADE_TIMEOUT = 500;
+
 export const ImageBoundary = ({ children, images }) => {
   const [ready, setReady] = useState(false);
-  const data = useRef({ started: false, loadedCount: 0 });
+  const initialized = useRef(false);
 
   useEffect(() => {
-    if (data.current.started) return;
+    if (initialized.current) return;
+
+    const startTime = performance.now();
+    let loadCount = 0;
 
     images.forEach((src) => {
       let image = new Image();
       image.onload = () => {
-        data.current.loadedCount++;
-        if (data.current.loadedCount === images.length) {
+        loadCount++;
+        if (loadCount === images.length) {
           setReady(true);
         }
       };
       image.src = src;
     });
 
-    data.current.started = true;
+    initialized.current = true;
   }, []);
 
   return (
-    <Fade in={ready} timeout={500}>
+    <Fade in={ready} timeout={FADE_TIMEOUT}>
       {children}
     </Fade>
   );

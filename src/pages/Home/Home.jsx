@@ -4,7 +4,6 @@ import { Box, Link, Typography, useTheme } from '@mui/material';
 import { AvatarPlanet } from './AvatarPlanet';
 import { SpaceCanvas } from './SpaceCanvas';
 
-import { useMainLoop } from 'src/hooks/useMainLoop';
 import BackgroundStarsImage from 'src/assets/images/background-stars.png';
 import StarSpinImage from 'src/assets/images/star-spin.gif';
 
@@ -108,8 +107,6 @@ const useStyles = (theme) => ({
 export const Home = forwardRef((props, ref) => {
   const theme = useTheme();
   const styles = useStyles(theme);
-
-  useMainLoop();
 
   return (
     <Box {...props} sx={styles.container} ref={ref}>

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import MainLoop from 'mainloop.js';
 
-import { subscribe, unsubscribe, MainLoopEvents } from 'src/hooks/useMainLoop';
 import { loadImages } from 'src/utils';
 import CheeseImage from 'src/assets/images/cheese.png';
 import StarImage from 'src/assets/images/star.png';
@@ -15,12 +15,18 @@ let mousePos = { x: 0, y: 0 };
 let hangers = [];
 
 export const SpaceCanvas = () => {
+  const performedSetup = useRef(false);
+
   useEffect(() => {
+    if (performedSetup.current) return;
+
     async function setup() {
       images = await loadImages([CheeseImage, StarImage]);
 
       // initially call resize when images are ready
       resizeHandler();
+
+      MainLoop.setUpdate(update).start();
     }
 
     // get the canvas context
@@ -30,11 +36,11 @@ export const SpaceCanvas = () => {
     window.addEventListener('resize', resizeHandler, false);
     window.addEventListener('click', clickHandler, false);
     window.addEventListener('mousemove', mouseMoveHandler, false);
-
-    // subscribe to the mainloop event
-    subscribe(MainLoopEvents.UPDATE, update);
+    window.addEventListener('visibilitychange', visibilityChangeHandler, false);
 
     setup();
+
+    performedSetup.current = true;
 
     // callback when component un-mounts
     return () => {
@@ -42,8 +48,13 @@ export const SpaceCanvas = () => {
       window.removeEventListener('resize', resizeHandler, false);
       window.removeEventListener('click', clickHandler, false);
       window.removeEventListener('mousemove', mouseMoveHandler, false);
+      window.removeEventListener(
+        'visibilitychange',
+        visibilityChangeHandler,
+        false
+      );
 
-      unsubscribe(MainLoopEvents.UPDATE, update);
+      MainLoop.setUpdate(undefined).stop();
     };
   }, []);
 
@@ -150,6 +161,14 @@ function resizeHandler() {
     }
   } else {
     hangers = [];
+  }
+}
+
+function visibilityChangeHandler() {
+  if (document.visibilityState === 'visible') {
+    MainLoop.start();
+  } else if (document.visibilityState === 'hidden') {
+    MainLoop.stop();
   }
 }
 
