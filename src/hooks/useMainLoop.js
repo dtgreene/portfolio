@@ -42,7 +42,7 @@ export const useMainLoop = () => {
   }, []);
 };
 
-function visibilityChangeHandler(event) {
+function visibilityChangeHandler() {
   if(document.visibilityState === 'visible') {
     MainLoop.start();
   } else if(document.visibilityState === 'hidden') {

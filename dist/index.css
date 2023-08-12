@@ -1,2 +1,0 @@
-@keyframes blinker{50%{opacity:0}}@keyframes spinner{100%{transform:rotate(360deg)}}@keyframes bob{50%{transform:translateY(16px)}}@keyframes swivel{0%{transform:rotate(22deg)}50%{transform:rotate(67deg)}100%{transform:rotate(22deg)}}@keyframes rope-swivel{0%{transform:rotate(0deg)}50%{transform:rotate(30deg)}100%{transform:rotate(0deg)}}body{overflow-x:hidden}
-

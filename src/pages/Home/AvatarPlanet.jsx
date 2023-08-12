@@ -1,6 +1,9 @@
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
 
+import DylanImage from 'src/assets/images/dylan.png';
+import DylanRealImage from 'src/assets/images/dylan-real.png';
+
 const planetColor = '#4effad';
 
 const useStyles = (theme) => ({
@@ -221,8 +224,8 @@ export const AvatarPlanet = () => {
     <Box sx={styles.planetSystem}>
       <Box sx={styles.planet}>
         <Box sx={styles.planetInner}>
-          <img src={require('../../assets/dylan.png')} />
-          <img src={require('../../assets/dylan-real.png')} />
+          <img src={DylanImage} />
+          <img src={DylanRealImage} />
         </Box>
       </Box>
       <Orbit index={0} frontClipY={64} rx={32} ry={3} styles={styles} />

@@ -1,0 +1,13 @@
+body {
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('src/assets/fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Gloria Hallelujah';
+  src: url('src/assets/fonts/GloriaHallelujah-Regular.ttf');
+}

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 
 import { subscribe, unsubscribe, MainLoopEvents } from 'src/hooks/useMainLoop';
 import { loadImages } from 'src/utils';
+import CheeseImage from 'src/assets/images/cheese.png';
+import StarImage from 'src/assets/images/star.png';
 
 const gravity = 0.001;
 const iterations = 3;
@@ -15,10 +17,7 @@ let hangers = [];
 export const SpaceCanvas = () => {
   useEffect(() => {
     async function setup() {
-      images = await loadImages([
-        require('../../assets/cheese.png'),
-        require('../../assets/star.png'),
-      ]);
+      images = await loadImages([CheeseImage, StarImage]);
 
       // initially call resize when images are ready
       resizeHandler();
@@ -117,7 +116,7 @@ function resizeHandler() {
   canvas.width = window.innerWidth;
   canvas.height = 512;
 
-  if(canvas.width > 900) {
+  if (canvas.width > 900) {
     if (images.length > 0) {
       if (hangers.length === 0) {
         // reset hangers
@@ -148,7 +147,7 @@ function resizeHandler() {
         hangers[1].slideX(canvas.width * 0.84);
         hangers[2].slideX(canvas.width * 0.92);
       }
-    }    
+    }
   } else {
     hangers = [];
   }

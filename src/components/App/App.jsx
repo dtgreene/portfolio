@@ -1,5 +1,4 @@
 import React from 'react';
-import { Routes, Route, HashRouter } from 'react-router-dom';
 import {
   ThemeProvider,
   CssBaseline,
@@ -7,34 +6,30 @@ import {
   responsiveFontSizes,
 } from '@mui/material';
 
-import { ErrorBoundary } from '../ErrorBoundary'
+import { ErrorBoundary } from '../ErrorBoundary';
 import { Home } from 'src/pages';
 
-let theme = createTheme({
+import './App.css';
+
+const baseTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
       main: '#4effad',
     },
+    background: 'blue',
   },
   typography: {
     fontFamily: 'Poppins, Helvetica',
   },
 });
-
-theme = responsiveFontSizes(theme);
+const theme = responsiveFontSizes(baseTheme);
 
 export const App = () => (
-  <HashRouter>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <ErrorBoundary>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </ErrorBoundary>
-    </ThemeProvider>
-  </HashRouter>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <ErrorBoundary>
+      <Home />
+    </ErrorBoundary>
+  </ThemeProvider>
 );

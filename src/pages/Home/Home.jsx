@@ -1,12 +1,14 @@
 import React from 'react';
 import { Box, Link, Typography, useTheme } from '@mui/material';
 
-import { useMainLoop } from 'src/hooks/useMainLoop';
 import { AvatarPlanet } from './AvatarPlanet';
 import { SpaceCanvas } from './SpaceCanvas';
-import { AlienShip } from './AlienShip';
 
-import './Home.scss';
+import { useMainLoop } from 'src/hooks/useMainLoop';
+import BackgroundStarsImage from 'src/assets/images/background-stars.png';
+import StarSpinImage from 'src/assets/images/star-spin.gif';
+
+import './Home.css';
 
 const useStyles = (theme) => ({
   container: {
@@ -15,7 +17,7 @@ const useStyles = (theme) => ({
     justifyContent: 'center',
   },
   stars: {
-    backgroundImage: `url(${require('../../assets/background-stars.png')})`,
+    backgroundImage: `url(${BackgroundStarsImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover, 100%',
     backgroundPosition: 'center',
@@ -106,7 +108,7 @@ const useStyles = (theme) => ({
 export const Home = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
-  
+
   useMainLoop();
 
   return (
@@ -147,7 +149,7 @@ export const Home = () => {
           >
             GitHub
           </Link>
-          <img src={require('../../assets/star-spin.gif')} />
+          <img src={StarSpinImage} />
           <Link
             variant="h5"
             color="primary"
@@ -157,7 +159,7 @@ export const Home = () => {
           >
             LinkedIn
           </Link>
-          <img src={require('../../assets/star-spin.gif')} />
+          <img src={StarSpinImage} />
           <Link
             variant="h5"
             color="primary"
@@ -168,7 +170,6 @@ export const Home = () => {
             CodePen
           </Link>
         </Box>
-        <AlienShip />
       </Box>
     </Box>
   );
